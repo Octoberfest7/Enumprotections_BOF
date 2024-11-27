@@ -1,0 +1,35 @@
+alias enumprotections
+{
+    local('$bid $barch $args $process');
+
+    $bid = $1;
+    $barch  = barch($1);
+
+    # read in the right BOF file
+    $handle = openf(script_resource("enumprotections. $+ $barch $+ .o"));
+    $data   = readb($handle, -1);
+    closef($handle);
+
+    # Announce what we are doing
+    blog($bid, "Enumerating process protections");
+
+    # Execute BOF
+    beacon_inline_execute($bid, $data, "go", $null);
+}
+
+
+beacon_command_register(
+    "enumprotections",
+    "Enumerate system process protection levels, service relation, user, session, and path",
+	"
+Command: enumprotections
+Summary: This BOF will enumerate all system process and identify each
+         ones protection level, service relation, user, session ID,
+         and file path.
+         
+Usage:   enumprotections
+
+Example:
+         enumprotections
+"
+); 
