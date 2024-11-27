@@ -1,5 +1,5 @@
-# Enumprotection BOF
-This BOF can be used to enumerate system processes and identify the protection level of each one. Additional information, like service relation, user, session, and path, are also returned. This information in combination can be used to identify good candidates for SYSTEM level DLL hijacks. Ideal processes will be:
+# Enumprotections BOF
+This BOF can be used to enumerate system processes and identify the protection level of each one. Additional information, like service relation, user, session, and path, are also returned. This information in combination can be used to identify good candidates to explore for SYSTEM level DLL hijacks. Ideal processes will be:
 
 1. Unprotected
 2. Associated with a service, thus being start/stoppable
@@ -12,6 +12,7 @@ This BOF can be used to enumerate system processes and identify the protection l
 This tool was written without the use of normal BOF API declarations (e.g. a bofdefs.h file). As outlined in this [blog post](https://blog.cybershenanigans.space/posts/writing-bofs-without-dfr/) by [Matt Ehrnschwender](https://x.com/M_alphaaa), it's possible to use objcopy to patch the proper symbols of format `DLL$API` into the BOF post-compilation. The Makefile for this tool calls objcopy, passing an imports_enumprotectionsXX.txt file containing the proper symbol replacements to the tool which then renders the BOF usable. 
 
 I have written a tool called BOFPatcher that automates this process. This allows users to write BOFs as normal C without worrying about cumbersome API declarations:
+
 ![alt text](img/bofpatcher.PNG)
 
 This tool is available to those who purchase my [BOF Development and Tradecraft](https://training.zeropointsecurity.co.uk/courses/bof-dev-and-tradecraft) course. 

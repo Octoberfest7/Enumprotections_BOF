@@ -206,7 +206,7 @@ void go (char* args, int length)
             DWORD pid = (DWORD)sys_info->UniqueProcessId;
             
             // Skip system idle process
-            if (pid < 3000)
+            if (pid == 0)
             {
                 sys_info = (SYSTEM_PROCESS_INFORMATION*)((ULONG_PTR)sys_info + sys_info->NextEntryOffset);
                 continue;
